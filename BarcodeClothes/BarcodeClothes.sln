@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "BarcodeClothes", "BarcodeClothes\BarcodeClothes.jsproj", "{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Android = Debug|Android
+		Debug|iOS = Debug|iOS
+		Debug|Windows-ARM = Debug|Windows-ARM
+		Debug|Windows-x64 = Debug|Windows-x64
+		Debug|Windows-x86 = Debug|Windows-x86
+		Release|Android = Release|Android
+		Release|iOS = Release|iOS
+		Release|Windows-ARM = Release|Windows-ARM
+		Release|Windows-x64 = Release|Windows-x64
+		Release|Windows-x86 = Release|Windows-x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Android.ActiveCfg = Debug|Android
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Android.Build.0 = Debug|Android
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Android.Deploy.0 = Debug|Android
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|iOS.ActiveCfg = Debug|iOS
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|iOS.Build.0 = Debug|iOS
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|iOS.Deploy.0 = Debug|iOS
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-ARM.ActiveCfg = Debug|Windows-ARM
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-ARM.Build.0 = Debug|Windows-ARM
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-ARM.Deploy.0 = Debug|Windows-ARM
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-x64.ActiveCfg = Debug|Windows-x64
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-x64.Build.0 = Debug|Windows-x64
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-x64.Deploy.0 = Debug|Windows-x64
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-x86.ActiveCfg = Debug|Windows-x86
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-x86.Build.0 = Debug|Windows-x86
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Debug|Windows-x86.Deploy.0 = Debug|Windows-x86
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Android.ActiveCfg = Release|Android
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Android.Build.0 = Release|Android
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Android.Deploy.0 = Release|Android
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|iOS.ActiveCfg = Release|iOS
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|iOS.Build.0 = Release|iOS
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|iOS.Deploy.0 = Release|iOS
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-ARM.ActiveCfg = Release|Windows-ARM
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-ARM.Build.0 = Release|Windows-ARM
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-ARM.Deploy.0 = Release|Windows-ARM
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-x64.ActiveCfg = Release|Windows-x64
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-x64.Build.0 = Release|Windows-x64
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-x64.Deploy.0 = Release|Windows-x64
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-x86.ActiveCfg = Release|Windows-x86
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-x86.Build.0 = Release|Windows-x86
+		{AE2F3510-341C-48C1-BCA3-C63E0B0525BF}.Release|Windows-x86.Deploy.0 = Release|Windows-x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EFF6C23-A2E7-444F-8591-15BFA1DDA7AF}
+	EndGlobalSection
+EndGlobal
