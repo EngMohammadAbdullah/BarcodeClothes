@@ -1,29 +1,125 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-    <head>
+<head>
     <!--
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-        
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>BarcodeClothes</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+    <meta http-equiv="Content-Security-Policy" content="default-src *  'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!-- Jquery Mobile Css And Jquery  -->
+    <link rel="stylesheet"
+          href="css/jquery.mobile-1.4.5.min.css" />
+
+    <script src="scripts/jquery-1.11.1.min.js"></script>
+    <script src="scripts/jquery.validate.min.js"></script>
+
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- End Of JQuery Mobile  -->
+    <!-- sweetalert2 -->
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+
+    <!-- Moment Js  -->
+    <script src="scripts/moment.js"></script>
+    <!-- Sweet Alert -->
+    <link href="css/sweetalert2.min.css" rel="stylesheet" />
+    <script src="scripts/sweetalert2.min.js"></script>
+    <!-- End Of Sweet Alert -->
+    <!-- Bootstrab  -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- full screen css  -->
+    <link href="css/fullscreen.css" rel="stylesheet" />
+    <!-- Site Style -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!-- End of Style -->
+    <!-- Db Dll -->
+    <!-- Stop Initilize Code -->
+    <script>
+        $(document).bind("mobileinit", function () {
+            $.mobile.autoInitializePage = false;
+
+        });
+    </script>
+    <!-- End Of Script -->
+
+</head>
+<body>
+
+    <!-- قائمة الزبائن -->
+    <div id="CustomerList" data-role="page">
+        <div data-role="header" data-position="fixed">
+            <div data-role="header" data-position="fixed">
+                <h1>الزبائن</h1>
+                <a class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left"
+                   href="#MainPage">الرئيسية</a>
             </div>
+            <div role="main" class="ui-content">
+
+                <br />
+                <form class="ui-filterable">
+                    <input id="filterBasic-input" data-type="search">
+                </form>
+                <br />
+                <ul id="CustomersList" data-role="listview" data-inset="true"
+                    data-filter="true" data-input="#filterBasic-input">
+                    <li>
+                        <a href="#">
+                            <img src="images/apple.png" class="ui-li-thumb"> <h2>
+                                dfgegerg
+
+                            </h2> <p class="topic"> fbfb</p>
+                            <p class="ui-li-aside">iOS</p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <img src="images/apple.png" class="ui-li-thumb"> <h2>
+                                dfgegerg
+
+                            </h2> <p class="topic"> fbfb</p>
+                            <p class="ui-li-aside">iOS</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/apple.png" class="ui-li-thumb"> <h2>
+                                dfgegerg
+
+                            </h2> <p class="topic"> fbfb</p>
+                            <p class="ui-li-aside">iOS</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/apple.png" class="ui-li-thumb"> <h2>
+                                dfgegerg
+
+                            </h2> <p class="topic"> fbfb</p>
+                            <p class="ui-li-aside">iOS</p>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-        <script type="text/javascript" src="scripts/index.js"></script>
-    </body>
+    </div>
+    <script src="scripts/Dbfile.js"></script>
+    <script src="scripts/loadEvents.js"></script>
+    <script src="scripts/DatabaseOperations.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+</body>
 </html>
