@@ -325,6 +325,22 @@
             })
         });
     },
+    dropTable: function (db, tableName, callBack) {
+        this.DataBase.transaction(function (tx) {
+
+            query =
+                "DROP TABLE IF EXISTS  " + tableName;
+            tx.executeSql(query);
+
+        }, function (error) {
+            callBack(false);
+            navigator.notification.alert('err' + error.message);
+        }, function () {
+            callBack(true);
+            // navigator.notification.alert('good' + tableName);
+
+        });
+    },
     closeDB: function () {
         db.close(function () {
             swal(
