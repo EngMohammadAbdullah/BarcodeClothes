@@ -199,3 +199,19 @@ function createGroupedProductsList(products) {
     $('[data-role=listview]').listview().listview('refresh');
 
 }
+
+//Details View List 
+function ViewDetailsProducts() {
+    GetGroupedProducts().then(function (gProducts) {
+        createGroupedProductsList(gProducts);
+        $("#clistNumber").append('<span>' + gProducts.length + '</span >')
+    })
+}
+
+function ViewGroupedProducts() {
+    GetProducts()
+        .then(function (product) {
+            createProductsList(product);
+            $("#clistNumber").append('<span>' + product.length + '</span >')
+        })
+}

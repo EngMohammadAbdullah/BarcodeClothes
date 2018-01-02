@@ -37,7 +37,8 @@
     <!-- full screen css  -->
     <link href="css/fullscreen.css" rel="stylesheet" />
     <!-- Site Style -->
-
+    <link href="css/CourgetteFont.css" type="text/css" rel="stylesheet" />
+    <link href="css/ShrikhandFont.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <!-- End of Style -->
     <!-- Db Dll -->
@@ -55,28 +56,60 @@
 
     <!-- قائمة الزبائن -->
     <div id="CustomerList" data-role="page">
+
         <div data-role="header" data-position="fixed">
-            <div data-role="header" data-position="fixed">
-                <h1>الزبائن</h1>
-                <a class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left"
-                   href="#MainPage">الرئيسية</a>
-            </div>
-            <div role="main" class="ui-content">
+            <h1>الزبائن</h1>
+            <a class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left"
+               href="#MainPage">الرئيسية</a>
+        </div>
 
-                <br />
-                <form class="ui-filterable">
-                    <input id="filterBasic-input" data-type="search">
-                </form>
-                <br />
-                <ul id="CustomersList" data-role="listview" data-inset="true"
-                    data-filter="true" data-input="#filterBasic-input"></ul>
+        <div role="main" class="ui-content">
 
-            </div>
-            <div data-role="footer" data-position="fixed">
-                <h1 id="clistNumber" ></h1>
-            </div>
+            <h1 id="hContainer">Container &nbsp; <samp>1</samp></h1>
+            <form class="ui-filterable">
+                <input id="filterBasic-input" data-type="search">
+            </form>
+            <br />
+            <ul id="CustomersList" data-role="listview" data-inset="true"
+                data-filter="true" data-input="#filterBasic-input"></ul>
 
         </div>
+        <div data-role="footer" data-position="fixed">
+            <h1 id="clistNumber"></h1>
+        </div>
+
+
+    </div>
+
+    <!-- إنشاء منتج  -->
+    <div id="ProductPage" data-theme="a" data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <h1> منتج جديد  </h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <input type="text" id="iProductType" placeholder="نوع المنتج">
+            <br />
+            <input type="text" id="iproductNumber" placeholder="رقم المنتج">
+            <br />
+
+            <input type="text" id="cAddress" placeholder="العنوان">
+            <br />
+
+            <input type="text" id="cEmail" placeholder="الإيميل">
+            <br />
+            <a id="cButtonSave" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">حفظ</a>
+            <a id="cButtonAdd" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">إضافة</a>
+            <a id="cButtonget" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">جد</a>
+            <br />
+        </div>
+
+        <div data-role="footer" data-position="fixed" data-theme="a">
+            <h3>Footer</h3>
+        </div>
+
     </div>
 
 

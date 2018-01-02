@@ -378,3 +378,16 @@ h1 {
         border-top-right-radius: 20px;
         border: 0px;
     }
+
+#hContainer {
+    font-family: 'CourgetteFont', cursive;
+    font-size: 22px;
+    margin-top: 5px;
+    padding-left: 30%;
+    padding-top: 10px;
+    background-color: #E91E63;
+    color: #fff;
+    height: 50px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
