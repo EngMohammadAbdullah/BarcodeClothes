@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <!--
@@ -13,7 +13,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <!-- Jquery Mobile Css And Jquery  -->
     <link rel="stylesheet"
-    href="css/jquery.mobile-1.4.5.min.css" />
+          href="css/jquery.mobile-1.4.5.min.css" />
 
     <script src="scripts/jquery-1.11.1.min.js"></script>
     <script src="scripts/jquery.validate.min.js"></script>
@@ -39,17 +39,21 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
     <script src="scripts/bootstrap.min.js"></script>
     <!-- full screen css  -->
+    <!-- Socket.io -->
+    <script src="scripts/socket.io.js"></script>
+    <!-- End of socket.io -->
     <link href="css/fullscreen.css" rel="stylesheet" />
     <!-- Site Style -->
     <link href="css/CourgetteFont.css" type="text/css" rel="stylesheet" />
     <link href="css/ShrikhandFont.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <!-- End of Style -->Gulp
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <!-- End of Style -->
     <!-- Db Dll -->
 
 
     <style>
-</style>
+    </style>
 </head>
 <body>
 
@@ -63,12 +67,12 @@
         <div id="ttee" data-role="main" class="ui-content">
 
             <input id="textQrocode" type="text"
-            value="https://hogangnono.com"
-            style="width:80%" />
-            <a id="cButtonSave111" 
-            class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">حفظ</a>
+                   value="https://hogangnono.com"
+                   style="width:80%" />
+            <a id="cButtonSave111"
+               class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">حفظ</a>
             <br /><br /><br />
-            
+
         </div>
 
     </div>
@@ -100,7 +104,7 @@
         <div data-role="header" data-position="fixed">
             <h1>الزبائن</h1>
             <a class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left"
-            href="#MainPage">الرئيسية</a>
+               href="#MainPage">الرئيسية</a>
         </div>
 
         <div role="main" class="ui-content">
@@ -111,7 +115,7 @@
             </form>
             <br />
             <ul id="CustomersList" data-role="listview" data-inset="true"
-            data-filter="true" data-input="#filterBasic-input"></ul>
+                data-filter="true" data-input="#filterBasic-input"></ul>
 
         </div>
         <div data-role="footer" data-position="fixed">
@@ -161,33 +165,33 @@
 
         <div data-role="main" class="ui-content">
             <a id="printButton" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">جد</a>
-            
+
             <a id="printButton2" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">2جد</a>
             <!--<a id="checkButton" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">جد</a>
                 <a id="printButton" class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-btn-b">جد</a>-->
-            </div>
         </div>
+    </div>
 
-        
 
-        <!-- Print Types Page -->
-        <div id="PrintedTypesPage" data-role="page">
-            <div data-role="header" data-position="fixed">
-                <h3>Header</h3>
-            </div>
-            <div role="main" class="ui-content">
-                <br>
-                <input id="gk-213YbkM" value="1" min="1" max="4" type="range">
-            </div>
+
+    <!-- Print Types Page -->
+    <div id="PrintedTypesPage" data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h3>Header</h3>
         </div>
+        <div role="main" class="ui-content">
+            <br>
+            <input id="gk-213YbkM" value="1" min="1" max="4" type="range">
+        </div>
+    </div>
 
-        <script src="scripts/Dbfile.js"></script>
-        <script src="scripts/loadEvents.js"></script>
-        <script src="scripts/DatabaseOperations.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-        <script type="text/javascript" src="scripts/index.js"></script>
+    <script src="scripts/Dbfile.js"></script>
+    <script src="scripts/loadEvents.js"></script>
+    <script src="scripts/DatabaseOperations.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
 
 
-    </body>
-    </html>
+</body>
+</html>

@@ -1,11 +1,18 @@
+
 //Import the mongoose module
 var mongoose = require('mongoose');
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var type = require("./Mongo/ProductTypes.js");
+
 
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://eng_mohammad:mohammad224@ds123312.mlab.com:23312/barcode_clothes';
+
 mongoose.connect(mongoDB);
 
 //Get the default connection
@@ -70,6 +77,7 @@ var randomize = require('randomatic');
 //})
 
 Container.find(function (err, container) {
+
     if (err) {
         console.log(err)
     }
@@ -77,6 +85,7 @@ Container.find(function (err, container) {
     var containerProduct = new product();
     containerProduct.containerNumber = container[0].container_number[0];
     for (var i = 0; i < 1000; i++) {
+
         var temp = randomize('0', 4);
         while (containerProduct.productNumbers.indexOf(temp) != -1) {
             var temp = randomize('0', 4);
@@ -119,3 +128,32 @@ Container.find(function (err, container) {
 //        }
 //    }
 //}
+
+app.get('/', function (req, res) {
+    res.send("Good");
+});
+
+
+io.on('connection', function (socket) {
+
+    socket.on("GetProductNumber", function (productName) {
+        type.GetTypeNumber(productName).then(function (productNumber) {
+            console.log(productNumber);
+            socket.emit("SetProductNumber", productNumber);
+
+        });
+    })
+
+    socket.emit()
+
+    socket.on('Server', function (msg) {
+
+        console.log('message: ' + msg);
+
+        socket.emit("news", "I am From  Server")
+    });
+});
+
+http.listen(3000, function () {
+    console.log('listening on *:3000');
+});

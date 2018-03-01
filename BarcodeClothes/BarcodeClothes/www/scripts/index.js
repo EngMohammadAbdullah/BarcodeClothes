@@ -7,10 +7,11 @@
 // statements
 (function () {
     "use strict";
-    var alltypes = ["CCR", "MCP", "LCP", "MTP", "MMPb", "VVP", "eerr", "eetr"];
+    var alltypes = ["ccr", "cch", "mcp", "rrt", "lcp", "eer", "yyt", "upl"];
     var qrcode = {};
     var centerDatabase = {};
     var ProductsDictionary = {};
+    var socket = io.connect("http://192.168.0.154:3000");
     var nowMoment = new moment();
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
     $(document).on("mobileinit", function () {
@@ -21,7 +22,18 @@
 
     function onDeviceReady() {
         try {
+            //Test Socket.io
+            socket.on('news', function (data) {
+                swal(data);
+            });
 
+            socket.emit("Server", "Barcode Test!!");
+
+
+            //End of socket.io
+            socket.on('news', function (data) {
+                swal(data);
+            });
             window.location.hash = 'testPage';
 
             AddDynamicControls();
@@ -184,13 +196,15 @@
 
                 case 1:
                     {
-
                         e = element.clone();
                         var ea = elementa.clone();
-                        var aa = $('<a class="ui-btn  ui-btn-b">' + alltypes[i] + '</a>').clone();
+                        var aa = $('<a class="ui-btn  ui-btn-b">' +
+                            alltypes[i] + '</a>').clone();
 
                         aa.click(function () {
                             /* Act on the event */
+
+                            socket.emit("GetProductNumber", $(this).text());
 
                             GetStringForPrinting($(this).text())
                                 .then(function (str) {
@@ -280,18 +294,26 @@
 
         return new Promise(function (resolve, reject) {
             try {
-                qrcode.makeCode(qrCodeString);
-                $("#qrcode img").load(function () {
-                    var uu = $("#qrcode img");
-                    var imgstr = '<br /> <img src="' + uu.attr("src")
-                        + '" alt="Alternate Text" />';
-                    //$("#ttee").append(imgstr);
-                    var documentToPrint = '<html xmlns="http://www.w3.org/1999/xhtml"><head> <title></title> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,maximum-scale=1.0"> <style type="text/css" media="screen"></style> <style type="text/css" media="print"></style>  <style> body { margin: 0; padding: 0; background-color: #FAFAFA; font: 12pt "Tahoma"; } * { box-sizing: border-box; -moz-box-sizing: border-box; } @page { size: 10cm 15cm; margin: 0; } @media print { .page { margin: 0; border: initial; border-radius: initial; width: initial; min-height: initial; box-shadow: initial; background: initial; } .subpage { border: 0px #fff solid; height: 140mm; font-size: 24px; margin-left: 2cm; margin-top: 0; padding-bottom: 30px; } h2 { margin: 0; margin-left:1.5cm } } </style>  </head><body> <div class="book"> <div class="page"> <div class="subpage" id="rrr"> <h2>' + qrCodeString + '</h2> <br />' + imgstr + '</div> </div> </div></body></html>';
 
-                    resolve(documentToPrint);
+                socket.on("SetProductNumber", function (productNumber) {
 
+                    swal(productNumber);
+                    qrcode.makeCode(productNumber);
+
+                    $("#qrcode img").load(function () {
+                        var uu = $("#qrcode img");
+                        var imgstr = '<br /> <img src="' + uu.attr("src")
+                            + '" alt="Alternate Text" />';
+                        //$("#ttee").append(imgstr);
+                        var documentToPrint = '<html xmlns="http://www.w3.org/1999/xhtml"><head> <title></title> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,maximum-scale=1.0"> <style type="text/css" media="screen"></style> <style type="text/css" media="print"></style>  <style> body { margin: 0; padding: 0; background-color: #FAFAFA; font: 12pt "Tahoma"; } * { box-sizing: border-box; -moz-box-sizing: border-box; } @page { size: 10cm 15cm; margin: 0; } @media print { .page { margin: 0; border: initial; border-radius: initial; width: initial; min-height: initial; box-shadow: initial; background: initial; } .subpage { border: 0px #fff solid; height: 140mm; font-size: 24px; margin-left: 2cm; margin-top: 0; padding-bottom: 30px; } h2 { margin: 0; margin-left:1.5cm } } </style>  </head><body> <div class="book"> <div class="page"> <div class="subpage" id="rrr"> <h2>' + productNumber + '</h2> <br />' + imgstr + '</div> </div> </div></body></html>';
+
+                        resolve(documentToPrint);
+
+
+                    });
 
                 });
+
 
             } catch (e) {
                 navigator.notification.alert(e.message)
