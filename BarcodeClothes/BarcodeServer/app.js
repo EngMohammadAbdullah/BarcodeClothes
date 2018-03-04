@@ -6,6 +6,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var type = require("./Mongo/ProductTypes.js");
 
+var port = 3000;
 
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
@@ -138,22 +139,33 @@ io.on('connection', function (socket) {
 
     socket.on("GetProductNumber", function (productName) {
         type.GetTypeNumber(productName).then(function (productNumber) {
-            console.log(productNumber);
+            console.log("\n" + productNumber + "\n");
             socket.emit("SetProductNumber", productNumber);
 
         });
-    })
+    });
 
     socket.emit()
 
     socket.on('Server', function (msg) {
 
-        console.log('message: ' + msg);
+        console.log(' \n message: ' + msg + '\n');
 
         socket.emit("news", "I am From  Server")
     });
 });
 
-http.listen(3000, function () {
-    console.log('listening on *:3000');
+process.on('uncaughtException', function (err) {
+    console.log(err.message);
+})
+process.on('exit', function () {
+    console.log("exit");
+})
+process.on('SIGTERM', function () {
+    console.log("SIGTERM");
+})
+http.on('listening', function () {
+    console.log('ok, server is running');
 });
+
+http.listen(3000);

@@ -22,6 +22,26 @@
 
     function onDeviceReady() {
         try {
+
+            window.location.hash = 'QrcodeScanPage';
+
+            try {
+                $("#QrcodeScannerBtn").click(function () {
+
+                    scan();
+
+                });
+                $("#ShowSCannedItemsBtn").click(function () {
+
+                    navigator.notification.alert(scannedItems);
+                    navigator.notification.alert(scannedItems.length);
+
+                });
+                //initMap();
+            } catch (e) {
+                swal(e.message);
+            }
+
             //Test Socket.io
             socket.on('news', function (data) {
                 swal(data);
@@ -34,7 +54,7 @@
             socket.on('news', function (data) {
                 swal(data);
             });
-            window.location.hash = 'testPage';
+
 
             AddDynamicControls();
             InitQrCodeObject().then(function (qrObj) {
@@ -142,6 +162,7 @@
     function InitQrCodeObject() {
         return new Promise(function (resolve, reject) {
             try {
+
                 var qObject = {
 
                     text: "http://jindo.dev.naver.com/collie",
@@ -172,6 +193,160 @@
         })
 
     }
+
+    var scannedItems = [];
+    function scan() {
+        cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                if (!result.cancelled) {
+                    // In this case we only want to process QR Codes
+                    if (result.format == "QR_CODE") {
+                        var value = result.text;
+                        // This is the retrieved content of the qr code
+                        saveItem(value).then(function () {
+                            scan();
+                        })
+
+                    } else {
+                        alert("Sorry, only qr codes this time ;)");
+                    }
+                } else {
+                    alert("The user has dismissed the scan");
+                }
+            },
+            function (error) {
+
+            }
+        );
+    }
+
+    function saveItem(value) {
+        return new Promise((resolve, reject) => {
+
+            scannedItems.push(value);
+            resolve();
+
+        })
+    }
+
+    //var Latitude = undefined;
+    //var Longitude = undefined;
+
+    //// Get geo coordinates
+
+    //function getMapLocation() {
+
+    //    navigator.geolocation.getCurrentPosition
+    //        (onMapSuccess);
+    //}
+
+    //// Success callback for get geo coordinates
+
+    //var onMapSuccess = function (position) {
+
+    //    Latitude = position.coords.latitude;
+    //    Longitude = position.coords.longitude;
+
+    //    getMap(Latitude, Longitude);
+
+    //}
+
+    //// Get map by using coordinates
+
+    //function getMap(latitude, longitude) {
+
+    //    var mapOptions = {
+    //        center: new google.maps.LatLng(0, 0),
+    //        zoom: 1,
+    //        mapTypeId: google.maps.MapTypeId.ROADMAP
+    //    };
+
+    //    map = new google.maps.Map
+    //        (document.getElementById("map"), mapOptions);
+
+
+    //    var latLong = new google.maps.LatLng(latitude, longitude);
+
+    //    var marker = new google.maps.Marker({
+    //        position: latLong
+    //    });
+
+    //    marker.setMap(map);
+    //    map.setZoom(15);
+    //    map.setCenter(marker.getPosition());
+    //}
+
+    //// Success callback for watching your changing position
+
+    //var onMapWatchSuccess = function (position) {
+
+    //    var updatedLatitude = position.coords.latitude;
+    //    var updatedLongitude = position.coords.longitude;
+
+    //    if (updatedLatitude != Latitude && updatedLongitude != Longitude) {
+
+    //        Latitude = updatedLatitude;
+    //        Longitude = updatedLongitude;
+
+    //        getMap(updatedLatitude, updatedLongitude);
+    //    }
+    //}
+
+    //// Error callback
+
+    //function onMapError(error) {
+    //    console.log('code: ' + error.code + '\n' +
+    //        'message: ' + error.message + '\n');
+    //}
+
+    //// Watch your changing position
+
+    //function watchMapPosition() {
+
+    //    return navigator.geolocation.watchPosition
+    //        (onMapWatchSuccess, onMapError, { timeout: 10000, enableHighAccuracy: false });
+    //}
+
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
+    // locate you.
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 6
+        });
+        var infoWindow = new google.maps.InfoWindow({ map: map });
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Location found.');
+                map.setCenter(pos);
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+    }
+
+
 
 
 
@@ -289,6 +464,7 @@
 
 
     }//enf of the AddDynamicControls
+
 
     function GetStringForPrinting(qrCodeString) {
 
