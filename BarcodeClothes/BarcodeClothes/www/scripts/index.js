@@ -23,8 +23,39 @@
     function onDeviceReady() {
         try {
 
-            window.location.hash = 'QrcodeScanPage';
+            window.location.hash = 'diagnosticPluginPage';
 
+            try {
+                $("#TestGpsEnabled").click(function () {
+                    cordova.plugins.diagnostic.getLocationMode(function (locationMode) {
+                        switch (locationMode) {
+                            case cordova.plugins.diagnostic.locationMode.HIGH_ACCURACY:
+                                navigator.notification.alert("High accuracy");
+                                break;
+                            case cordova.plugins.diagnostic.locationMode.BATTERY_SAVING:
+                                navigator.notification.alert("Battery saving");
+                                break;
+                            case cordova.plugins.diagnostic.locationMode.DEVICE_ONLY:
+                                navigator.notification.alert("Device only");
+                                break;
+                            case cordova.plugins.diagnostic.locationMode.LOCATION_OFF:
+                                navigator.notification.alert("Location off");
+                                break;
+                        }
+                    }, function (error) {
+                        console.error("The following error occurred: " + error);
+                    });
+                })
+            } catch (e) {
+                swal(e.message)
+            }
+            try {
+
+                initMap();
+
+            } catch (e) {
+                swal(e.message);
+            }
             try {
                 $("#QrcodeScannerBtn").click(function () {
 
@@ -123,11 +154,12 @@
 
                 });
 
+                //هنا يجب إعادة تنفيذه 
 
-                GetGroupedProducts().then(function (gProducts) {
-                    createGroupedProductsList(gProducts);
-                    $("#clistNumber").append('<span>' + gProducts.length + '</span >')
-                });
+                //GetGroupedProducts().then(function (gProducts) {
+                //    createGroupedProductsList(gProducts);
+                //    $("#clistNumber").append('<span>' + gProducts.length + '</span >')
+                //});
 
 
             }) //End of   openDatabase()
@@ -195,6 +227,7 @@
     }
 
     var scannedItems = [];
+
     function scan() {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
@@ -229,125 +262,161 @@
         })
     }
 
-    //var Latitude = undefined;
-    //var Longitude = undefined;
-
-    //// Get geo coordinates
-
-    //function getMapLocation() {
-
-    //    navigator.geolocation.getCurrentPosition
-    //        (onMapSuccess);
-    //}
-
-    //// Success callback for get geo coordinates
-
-    //var onMapSuccess = function (position) {
-
-    //    Latitude = position.coords.latitude;
-    //    Longitude = position.coords.longitude;
-
-    //    getMap(Latitude, Longitude);
-
-    //}
-
-    //// Get map by using coordinates
-
-    //function getMap(latitude, longitude) {
-
-    //    var mapOptions = {
-    //        center: new google.maps.LatLng(0, 0),
-    //        zoom: 1,
-    //        mapTypeId: google.maps.MapTypeId.ROADMAP
-    //    };
-
-    //    map = new google.maps.Map
-    //        (document.getElementById("map"), mapOptions);
 
 
-    //    var latLong = new google.maps.LatLng(latitude, longitude);
-
-    //    var marker = new google.maps.Marker({
-    //        position: latLong
-    //    });
-
-    //    marker.setMap(map);
-    //    map.setZoom(15);
-    //    map.setCenter(marker.getPosition());
-    //}
-
-    //// Success callback for watching your changing position
-
-    //var onMapWatchSuccess = function (position) {
-
-    //    var updatedLatitude = position.coords.latitude;
-    //    var updatedLongitude = position.coords.longitude;
-
-    //    if (updatedLatitude != Latitude && updatedLongitude != Longitude) {
-
-    //        Latitude = updatedLatitude;
-    //        Longitude = updatedLongitude;
-
-    //        getMap(updatedLatitude, updatedLongitude);
-    //    }
-    //}
-
-    //// Error callback
-
-    //function onMapError(error) {
-    //    console.log('code: ' + error.code + '\n' +
-    //        'message: ' + error.message + '\n');
-    //}
-
-    //// Watch your changing position
-
-    //function watchMapPosition() {
-
-    //    return navigator.geolocation.watchPosition
-    //        (onMapWatchSuccess, onMapError, { timeout: 10000, enableHighAccuracy: false });
-    //}
 
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you.
 
+
     function initMap() {
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var geocoder = new google.maps.Geocoder;
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 6
+            zoom: 14,
+            center: { lat: 51.1253664, lng: 4.2096528 }
         });
-        var infoWindow = new google.maps.InfoWindow({ map: map });
+        directionsDisplay.setMap(map);
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
 
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Location found.');
-                map.setCenter(pos);
-            }, function () {
-                handleLocationError(true, infoWindow, map.getCenter());
+        GetCurrentLocation().then((pos) => {
+            geocodeLatLng(geocoder, pos).then(function (address) {
+                calculateAndDisplayRoute(directionsService, directionsDisplay, address);
             });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
+
+            GetLatLngFromAddress(geocoder, "Boodtsstraat 12, 9140 Temse").
+                then((pos2) => {
+
+                    try {
+                        var tt = getDistance(pos, pos2);
+                        alert(tt + "m");
+                    } catch (e) {
+                        swal(e.message);
+                    }
+
+                });
+
+        });
+
+
+
+
+
+        // var onChangeHandler = function () {
+
+        //   };
+        //document.getElementById('start').addEventListener('change', onChangeHandler);
+        //document.getElementById('end').addEventListener('change', onChangeHandler);
+
+        //   calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
+    var rad = function (x) {
+        return x * Math.PI / 180;
+    };
+
+    var getDistance = function (p1, p2) {
+
+        var R = 6378137; // Earth’s mean radius in meter
+        var dLat = rad(p2.lat - p1.lat);
+        var dLong = rad(p2.lng - p1.lng);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d; // returns the distance in meter
+    };
+
+    function GetCurrentLocation() {
+        return new Promise((resolve, reject) => {
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    //geocodeLatLng(geocoder, "51.1253357,4.207866").then(function (address) {
+                    //    calculateAndDisplayRoute(directionsService, directionsDisplay, address);
+                    //})
+
+                    resolve(pos);
+
+                }, function () {
+                    handleLocationError();
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError();
+            }
+
+        })
+    }
+
+    function handleLocationError() {
+        swal("error")
+    }
+    function geocodeLatLng(geocoder, pos) {
+        return new Promise((resolve, reject) => {
+            geocoder.geocode({ 'location': pos }, function (results, status) {
+                if (status === 'OK') {
+                    alert(pos.lat);
+                    if (results[0]) {
+                        resolve(results[0].formatted_address);
+                        alert(results[0].formatted_address);
+                    } else {
+                        reject('No results found');
+                        swal('No results found');
+                    }
+                } else {
+                    reject('Geocoder failed due to: ' + status);
+                    swal('Geocoder failed due to: ' + status);
+                }
+            });
+
+
+        })
+
+
     }
 
 
+    function GetLatLngFromAddress(geocoder, address) {
 
+        return new Promise((resolve, reject) => {
+
+            geocoder.geocode({ 'address': address }, function (results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+                    var pos = { lat: latitude, lng: longitude };
+                    resolve(pos);
+                }
+            });
+
+        });
+    }
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, address) {
+
+        directionsService.route({
+            origin: address,
+            destination: "Boodtsstraat 12, 9140 Temse",
+            travelMode: google.maps.TravelMode["WALKING"]
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                swal('Directions request failed due to ' + status);
+            }
+        });
+    }
 
 
     function AddDynamicControls() {

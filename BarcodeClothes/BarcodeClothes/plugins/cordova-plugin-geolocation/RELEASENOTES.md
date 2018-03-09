@@ -7,9 +7,9 @@
 # to you under the Apache License, Version 2.0 (the
 # "License"); you may not use this file except in compliance
 # with the License.  You may obtain a copy of the License at
-#
+# 
 # http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing,
 # software distributed under the License is distributed on an
 # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -19,21 +19,6 @@
 #
 -->
 # Release Notes
-
-### 4.0.1 (Dec 27, 2017)
-* [CB-13705](https://issues.apache.org/jira/browse/CB-13705) Fix to allow 4.0.0 version install
-
-### 4.0.0 (Dec 15, 2017)
-* [CB-13664](https://issues.apache.org/jira/browse/CB-13664) remove deprecated platforms
-
-### 3.0.0 (Nov 06, 2017)
-* [CB-13267](https://issues.apache.org/jira/browse/CB-13267) (iOS): Remove **iOS** usage descriptions
-* [CB-13516](https://issues.apache.org/jira/browse/CB-13516) (all): Add 'protective' entry to `cordovaDependencies`
-* [CB-13472](https://issues.apache.org/jira/browse/CB-13472) (CI) Fixed Travis **Android** builds again
-* [CB-13294](https://issues.apache.org/jira/browse/CB-13294) Remove `cordova-plugin-compat`
-* [CB-13299](https://issues.apache.org/jira/browse/CB-13299) (CI) Fix **Android** builds
-* [CB-12895](https://issues.apache.org/jira/browse/CB-12895) added `eslint` and removed `jshint`
-* [CB-12847](https://issues.apache.org/jira/browse/CB-12847) added `bugs` entry to `package.json`.
 
 ### 2.4.3 (Apr 27, 2017)
 * [CB-12622](https://issues.apache.org/jira/browse/CB-12622) Added **Android 6.0** build badge to `README`
